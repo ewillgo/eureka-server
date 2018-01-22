@@ -1,0 +1,37 @@
+server:
+  port: 10000
+
+spring:
+  application:
+    name: eureka-server
+    index: 0
+
+management:
+  context-path: "${EUREKA_MONITOR_PATH}"
+
+security:
+  user:
+    name: "${EUREKA_USER}"
+    password: "${EUREKA_PASSWORD}"
+  basic:
+    enabled: true
+    authorize-mode: AUTHENTICATED
+    path: "/**"
+  headers:
+    hsts: none
+  sessions: never
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: "http://${eureka.instance.hostname}:${server.port}/eureka/"
+  instance:
+    prefer-ip-address: false
+    hostname: "${spring.application.name}"
+    status-page-url-path: "${management.context-path}/info"
+    health-check-url-path: "${management.context-path}/health"
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 30000
