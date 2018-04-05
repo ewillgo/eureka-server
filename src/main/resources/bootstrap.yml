@@ -4,22 +4,12 @@ server:
 spring:
   application:
     name: eureka-server
-    index: 0
-
-management:
-  context-path: "${EUREKA_MONITOR_PATH}"
-
-security:
-  user:
-    name: "${EUREKA_USER}"
-    password: "${EUREKA_PASSWORD}"
-  basic:
-    enabled: true
-    authorize-mode: AUTHENTICATED
-    path: "/**"
-  headers:
-    hsts: none
-  sessions: never
+  security:
+    user:
+      name: "${EUREKA_USER}"
+      password: "${EUREKA_PASSWORD}"
+  resources:
+    add-mappings: true
 
 eureka:
   client:
@@ -30,8 +20,8 @@ eureka:
   instance:
     prefer-ip-address: false
     hostname: "${spring.application.name}"
-    status-page-url-path: "${management.context-path}/info"
-    health-check-url-path: "${management.context-path}/health"
+    status-page-url-path: "/actuator/info"
+    health-check-url-path: "/actuator/health"
   server:
     enable-self-preservation: false
     eviction-interval-timer-in-ms: 30000

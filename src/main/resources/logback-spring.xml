@@ -34,7 +34,7 @@
         </encoder>
     </appender>
 
-    <logger name="cc.sportsdb.eureka" level="DEBUG" />
+    <logger name="eureka.server" level="INFO" />
 
     <root level="INFO">
         <appender-ref ref="console"/>
